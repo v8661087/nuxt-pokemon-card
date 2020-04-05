@@ -1,4 +1,4 @@
-# nuxt-ecommerce
+# nuxt-pokemon-card
 
 > My hunky-dory Nuxt.js project
 

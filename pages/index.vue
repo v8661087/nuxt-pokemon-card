@@ -3,7 +3,12 @@
     <v-content>
       <v-container>
         <v-row v-if="products.length">
-          <Card v-for="product in products" :product="product" :key="product.id" />
+          <Product
+            v-for="product in products"
+            :product="product"
+            :key="product._id"
+            @add="addToCards(product)"
+          />
         </v-row>
         <v-row v-else justify="center" align="center">
           <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
@@ -14,13 +19,13 @@
 </template>
 
 <script>
-import Card from "@/components/Card";
+import Product from "@/components/Product";
 export default {
   props: {
     source: String
   },
   components: {
-    Card
+    Product
   },
   data() {
     return {
@@ -28,6 +33,16 @@ export default {
       loading: true,
       products: []
     };
+  },
+  computed: {
+    cards() {
+      return this.$store.state.cards;
+    }
+  },
+  methods: {
+    addToCards(product) {
+      this.$store.commit("addToCards", product);
+    }
   },
   created() {
     this.$vuetify.theme.dark = true;
