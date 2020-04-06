@@ -8,7 +8,7 @@
               <v-icon>mdi-home</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>home</v-list-item-title>
+              <v-list-item-title>Home</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </nuxt-link>
@@ -18,7 +18,17 @@
               <v-icon>mdi-cards</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>cards</v-list-item-title>
+              <v-list-item-title>Cards</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </nuxt-link>
+        <nuxt-link to="login">
+          <v-list-item link>
+            <v-list-item-action>
+              <v-icon>mdi-login</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Login</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </nuxt-link>
