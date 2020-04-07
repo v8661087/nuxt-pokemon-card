@@ -1,4 +1,5 @@
 export const state = () => ({
+  authenticated: false,
   products: [],
   cards: [{}, {}, {}, {}, {}, {}]
 });
