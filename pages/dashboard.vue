@@ -1,5 +1,9 @@
 <template>
-  <h1>dashboard</h1>
+  <v-content>
+    <v-container>
+      <h1>dashboard</h1>
+    </v-container>
+  </v-content>
 </template>
 
 <script>

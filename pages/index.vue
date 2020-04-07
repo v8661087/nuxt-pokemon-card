@@ -1,16 +1,39 @@
 <template>
   <v-app>
     <v-content>
-      <v-container>
-        <v-row v-if="products.length">
+      <v-container v-if="products.length">
+        <v-row>
+          <v-btn
+            v-for="type in types"
+            :key="type.name"
+            class="ma-1"
+            fab
+            dark
+            :color="type.color"
+            @click="setType(type)"
+          >{{type.name}}</v-btn>
+        </v-row>
+        <v-row>
           <Product
-            v-for="product in products"
+            v-for="product in filteredProducts"
             :product="product"
             :key="product._id"
             @add="addToCards(product)"
           />
+          <nuxt-link to="cards">
+            <v-btn fixed dark fab bottom right color="pink">
+              <v-icon>mdi-cards</v-icon>
+            </v-btn>
+          </nuxt-link>
         </v-row>
-        <v-row v-else justify="center" align="center">
+        <v-row justify="center">
+          <v-dialog v-model="dialog" max-width="90">
+            <img src="@/assets/pokeball.png" />
+          </v-dialog>
+        </v-row>
+      </v-container>
+      <v-container v-else>
+        <v-row justify="center" align="center">
           <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
         </v-row>
       </v-container>
@@ -20,6 +43,7 @@
 
 <script>
 import Product from "@/components/Product";
+import { mapState } from "vuex";
 export default {
   props: {
     source: String
@@ -30,25 +54,52 @@ export default {
   data() {
     return {
       drawer: null,
-      loading: true,
-      products: []
+      dialog: false,
+      currType: "All",
+      types: [
+        { name: "All" },
+        { name: "火", color: "red darken-2" },
+        { name: "水", color: "blue darken-2" },
+        { name: "草", color: "green darken-2" },
+        { name: "電", color: "yellow darken-2" },
+        { name: "冰", color: "cyan darken-2" },
+        { name: "龍", color: "pink darken-2" },
+        { name: "鋼", color: "purple darken-2" },
+        { name: "飛行", color: "indigo darken-2" },
+        { name: "一般", color: "teal darken-2" },
+        { name: "格鬥", color: "lime darken-2" }
+      ]
     };
   },
   computed: {
-    cards() {
-      return this.$store.state.cards;
+    ...mapState(["loading", "products", "cards"]),
+    filteredProducts() {
+      if (this.currType === "All") {
+        return this.products;
+      }
+      return this.products.filter(
+        item => item.type.indexOf(this.currType) > -1
+      );
     }
   },
   methods: {
     addToCards(product) {
       this.$store.commit("addToCards", product);
+      this.dialog = true;
+      setTimeout(() => {
+        this.dialog = false;
+      }, 500);
+    },
+    setType(type) {
+      this.currType = type.name;
     }
   },
   created() {
     this.$vuetify.theme.dark = true;
-    fetch("https://guarded-garden-48374.herokuapp.com/products")
+    /*fetch("https://guarded-garden-48374.herokuapp.com/products")
       .then(res => res.json())
-      .then(res => (this.products = res));
+      .then(res => (this.products = res));*/
+    this.$store.dispatch("getProducts");
   }
 };
 </script>

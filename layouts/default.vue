@@ -2,43 +2,13 @@
   <v-app dark>
     <v-navigation-drawer v-model="drawer" app clipped>
       <v-list dense>
-        <nuxt-link to="/">
+        <nuxt-link v-for="link in links" :key="link.title" :link="link" :to="link.to">
           <v-list-item link>
             <v-list-item-action>
-              <v-icon>mdi-home</v-icon>
+              <v-icon>{{link.icon}}</v-icon>
             </v-list-item-action>
             <v-list-item-content>
-              <v-list-item-title>Home</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </nuxt-link>
-        <nuxt-link to="cards">
-          <v-list-item link>
-            <v-list-item-action>
-              <v-icon>mdi-cards</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title>Cards</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </nuxt-link>
-        <nuxt-link to="login">
-          <v-list-item link>
-            <v-list-item-action>
-              <v-icon>mdi-login</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title>Login</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </nuxt-link>
-        <nuxt-link to="dashboard">
-          <v-list-item link>
-            <v-list-item-action>
-              <v-icon>mdi-view-dashboard</v-icon>
-            </v-list-item-action>
-            <v-list-item-content>
-              <v-list-item-title>Dashboard</v-list-item-title>
+              <v-list-item-title>{{link.title}}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </nuxt-link>
@@ -49,7 +19,7 @@
       <v-toolbar-title>nuxt-pokemon-card</v-toolbar-title>
     </v-app-bar>
 
-    <v-content>
+    <v-content class="pa-0">
       <v-container>
         <nuxt />
       </v-container>
@@ -67,23 +37,34 @@ export default {
       clipped: false,
       drawer: false,
       fixed: false,
-      items: [
+      links: [
         {
-          icon: "mdi-apps",
-          title: "Welcome",
+          icon: "mdi-home",
+          title: "Home",
           to: "/"
         },
         {
-          icon: "mdi-chart-bubble",
-          title: "Inspire",
-          to: "/inspire"
+          icon: "mdi-cards",
+          title: "Cards",
+          to: "/cards"
+        },
+        {
+          icon: "mdi-login",
+          title: "Login",
+          to: "/login"
+        },
+        {
+          icon: "mdi-view-dashboard",
+          title: "Dashboard",
+          to: "/dashboard"
         }
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: "Vuetify.js"
+      ]
     };
   }
 };
 </script>
+<style>
+a {
+  text-decoration: none;
+}
+</style>
