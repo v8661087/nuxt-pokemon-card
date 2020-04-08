@@ -1,7 +1,8 @@
 export const state = () => ({
   authenticated: false,
   products: [],
-  cards: [{}, {}, {}, {}, {}, {}]
+  cards: [{}, {}, {}, {}, {}, {}],
+  accounts: [{ email: "test@test.com", password: "testtest" }]
 });
 export const mutations = {
   addToCards(state, product) {
@@ -14,14 +15,18 @@ export const mutations = {
   },
   GET_PRODUCTS(state, payload) {
     state.products = payload;
+  },
+  login(state) {
+    state.authenticated = true;
+  },
+  logout(state) {
+    state.authenticated = false;
   }
 };
 export const actions = {
   async getProducts({ commit }) {
     try {
-      const products = await this.$axios.$get(
-        "https://guarded-garden-48374.herokuapp.com/products"
-      );
+      const products = await this.$axios.$get(process.env.VUE_APP_PRODUCTS_URL);
       commit("GET_PRODUCTS", products);
     } catch (error) {}
   }

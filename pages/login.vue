@@ -19,25 +19,33 @@
 export default {
   data: () => ({
     valid: true,
-    email: "",
+    email: "test@test.com",
     emailRules: [
       v => !!v || "E-mail is required",
       v => /.+@.+\..+/.test(v) || "E-mail must be valid"
     ],
-    password: "",
+    password: "testtest",
     passwordRules: [v => !!v || "Password is required"]
   }),
-
   methods: {
     validate() {
-      this.$refs.form.validate();
+      if (this.$refs.form.validate()) {
+        this.login();
+      }
     },
-    reset() {
-      this.$refs.form.reset();
-    },
-    resetValidation() {
-      this.$refs.form.resetValidation();
+    login() {
+      const accounts = this.$store.state.accounts;
+      let account = accounts.find(
+        item => item.email === this.email && item.password === this.password
+      );
+      if (account) {
+        setTimeout(() => {
+          this.$store.commit("login");
+          this.$router.push("/dashboard");
+        }, 500);
+      }
     }
-  }
+  },
+  middleware: "auth"
 };
 </script>

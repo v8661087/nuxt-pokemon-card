@@ -12,11 +12,42 @@
             </v-list-item-content>
           </v-list-item>
         </nuxt-link>
+        <nuxt-link to="/dashoboard" v-show="$store.state.authenticated">
+          <v-list-item link>
+            <v-list-item-action>
+              <v-icon>mdi-view-dashboard</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Dashboard</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </nuxt-link>
+        <nuxt-link to="/login" v-show="!$store.state.authenticated">
+          <v-list-item link>
+            <v-list-item-action>
+              <v-icon>mdi-login</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Login</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </nuxt-link>
+        <v-list-item link v-show="$store.state.authenticated" @click="logout">
+          <v-list-item-action>
+            <v-icon>mdi-logout</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Logout</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
     <v-app-bar app clipped-left>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title>nuxt-pokemon-card</v-toolbar-title>
+
+      <v-toolbar-title>
+        <nuxt-link to="/">nuxt-pokemon-card</nuxt-link>
+      </v-toolbar-title>
     </v-app-bar>
 
     <v-content class="pa-0">
@@ -47,19 +78,15 @@ export default {
           icon: "mdi-cards",
           title: "Cards",
           to: "/cards"
-        },
-        {
-          icon: "mdi-login",
-          title: "Login",
-          to: "/login"
-        },
-        {
-          icon: "mdi-view-dashboard",
-          title: "Dashboard",
-          to: "/dashboard"
         }
       ]
     };
+  },
+  methods: {
+    logout() {
+      this.$store.commit("logout");
+      this.$router.push("/login");
+    }
   }
 };
 </script>
