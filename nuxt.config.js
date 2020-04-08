@@ -21,7 +21,7 @@ export default {
       {
         hid: "description",
         name: "description",
-        content: process.env.npm_package_description || ""
+        content: "nuxt-pokemon-card"
       }
     ],
     link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
@@ -29,7 +29,10 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: "#fff" },
+  loading: {
+    color: "rgb(4, 153, 153)",
+    height: "3px"
+  },
   /*
    ** Global CSS
    */

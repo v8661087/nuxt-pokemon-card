@@ -94,12 +94,19 @@ export default {
       this.currType = type.name;
     }
   },
+  async fetch({ store }) {
+    await store.dispatch("getProducts");
+  },
   created() {
     this.$vuetify.theme.dark = true;
-    /*fetch("https://guarded-garden-48374.herokuapp.com/products")
-      .then(res => res.json())
-      .then(res => (this.products = res));*/
-    this.$store.dispatch("getProducts");
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.$nuxt.$loading.start();
+      if (this.products) {
+        this.$nuxt.$loading.finish();
+      }
+    });
   }
 };
 </script>
