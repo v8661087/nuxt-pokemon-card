@@ -1,112 +1,64 @@
 <template>
-  <v-app>
-    <v-content>
-      <v-container v-if="products.length">
-        <v-row>
-          <v-btn
-            v-for="type in types"
-            :key="type.name"
-            class="ma-1"
-            fab
-            dark
-            :color="type.color"
-            @click="setType(type)"
-          >{{type.name}}</v-btn>
-        </v-row>
-        <v-row>
-          <Product
-            v-for="product in filteredProducts"
-            :product="product"
-            :key="product._id"
-            @add="addToCards(product)"
-          />
-          <nuxt-link to="cards">
-            <v-btn fixed dark fab bottom right color="pink">
-              <v-icon>mdi-cards</v-icon>
-            </v-btn>
-          </nuxt-link>
-        </v-row>
-        <v-row justify="center">
-          <v-dialog v-model="dialog" max-width="90">
-            <img src="@/assets/pokeball.png" />
-          </v-dialog>
-        </v-row>
-      </v-container>
-      <v-container v-else>
-        <v-row justify="center" align="center">
-          <v-progress-circular indeterminate color="grey lighten-5"></v-progress-circular>
-        </v-row>
-      </v-container>
-    </v-content>
-  </v-app>
+  <v-content>
+    <v-container>
+      <v-carousel cycle height="400" hide-delimiter-background show-arrows-on-hover>
+        <v-carousel-item v-for="(item,i) in items" :key="i" :src="item.src"></v-carousel-item>
+      </v-carousel>
+      <v-row class="pa-3 d-flex" justify="space-between">
+        <v-img max-width="270" :src="require('@/assets/wallpaper3.jpg')"></v-img>
+        <v-card width="270">
+          <v-carousel cycle hide-delimiter-background :show-arrows="false">
+            <v-carousel-item v-for="(item,i) in sides" :key="i" :src="item.src"></v-carousel-item>
+          </v-carousel>
+        </v-card>
+        <v-img max-width="270" :src="require('@/assets/wallpaper6.jpg')"></v-img>
+      </v-row>
+      <nuxt-link to="/pokemon">
+        <v-img :src="require('@/assets/pokemon-title.png')"></v-img>
+      </nuxt-link>
+    </v-container>
+  </v-content>
 </template>
-
 <script>
-import Product from "@/components/Product";
-import { mapState } from "vuex";
 export default {
-  props: {
-    source: String
-  },
-  components: {
-    Product
-  },
   data() {
     return {
-      drawer: null,
-      dialog: false,
-      currType: "All",
-      types: [
-        { name: "All" },
-        { name: "火", color: "red darken-2" },
-        { name: "水", color: "blue darken-2" },
-        { name: "草", color: "green darken-2" },
-        { name: "電", color: "yellow darken-2" },
-        { name: "冰", color: "cyan darken-2" },
-        { name: "龍", color: "pink darken-2" },
-        { name: "鋼", color: "purple darken-2" },
-        { name: "飛行", color: "indigo darken-2" },
-        { name: "一般", color: "teal darken-2" },
-        { name: "格鬥", color: "lime darken-2" }
+      items: [
+        {
+          src: "https://pokemongolive.com/img/posts/gobattleleague-season1.jpg"
+        },
+        {
+          src:
+            "https://pokemongolive.com/img/posts/gobattleleague-announcement-2.jpg"
+        },
+        {
+          src:
+            "https://applealmond.com/wp-content/uploads/2018/09/1536597576-022637b1f0a61763ab921258cb559bf2.jpg"
+        },
+        {
+          src:
+            "https://cdn.unwire.pro/wp-content/uploads/2018/07/pokemon-go-two-years-1320x774.jpg"
+        }
+      ],
+      sides: [
+        {
+          src:
+            "https://www.upmedia.mg/upload/content/20190628/Wn190628152858813996.jpg"
+        },
+        {
+          src:
+            "https://image-cdn.hypb.st/https%3A%2F%2Fhk.hypebeast.com%2Ffiles%2F2019%2F11%2Fpokemon-sword-shield-best-selling-launch-series-1.jpg?q=75&w=800&cbr=1&fit=max"
+        },
+        {
+          src:
+            "https://img.4gamers.com.tw/ckfinder/files/Elvis/News/20191014-Pokemon/a-regi-return-2019.jpg"
+        },
+        {
+          src:
+            "https://iwaishin.com/wp-content/uploads/2018/02/%E7%83%88%E7%A9%BA%E5%BA%A7-Pokemon-Go.png"
+        }
       ]
     };
-  },
-  computed: {
-    ...mapState(["loading", "products", "cards"]),
-    filteredProducts() {
-      if (this.currType === "All") {
-        return this.products;
-      }
-      return this.products.filter(
-        item => item.type.indexOf(this.currType) > -1
-      );
-    }
-  },
-  methods: {
-    addToCards(product) {
-      this.$store.commit("addToCards", product);
-      this.dialog = true;
-      setTimeout(() => {
-        this.dialog = false;
-      }, 500);
-    },
-    setType(type) {
-      this.currType = type.name;
-    }
-  },
-  async fetch({ store }) {
-    await store.dispatch("getProducts");
-  },
-  created() {
-    this.$vuetify.theme.dark = true;
-  },
-  mounted() {
-    this.$nextTick(() => {
-      this.$nuxt.$loading.start();
-      if (this.products) {
-        this.$nuxt.$loading.finish();
-      }
-    });
   }
 };
 </script>
