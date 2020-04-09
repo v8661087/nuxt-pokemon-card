@@ -100,6 +100,11 @@ export default {
           icon: "mdi-cards",
           title: "Cards",
           to: "/cards"
+        },
+        {
+          icon: "mdi-sword",
+          title: "Battle",
+          to: "/battle"
         }
       ],
       icons: [
