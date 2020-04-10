@@ -6,8 +6,10 @@ export const state = () => ({
 });
 export const mutations = {
   addToCards(state, product) {
-    state.cards.unshift({ ...product });
-    state.cards.pop();
+    if (state.cards.indexOf(product) === -1) {
+      state.cards.unshift(product);
+      state.cards.pop();
+    }
   },
   deleteFromCards(state, product) {
     state.cards.splice(state.cards.indexOf(product), 1);

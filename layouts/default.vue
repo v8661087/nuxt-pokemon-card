@@ -1,33 +1,40 @@
 <template>
   <v-app dark>
-    <v-app-bar app clipped-left>
-      <v-toolbar-title>
-        <nuxt-link to="/">nuxt-pokemon-card</nuxt-link>
-      </v-toolbar-title>
-      <v-row class="d-flex ml-3">
+    <v-navigation-drawer v-model="drawer" app clipped>
+      <v-list dense>
+        <nuxt-link to="/">
+          <v-list-item link>
+            <v-list-item-action>
+              <v-icon>mdi-home</v-icon>
+            </v-list-item-action>
+            <v-list-item-content class>
+              <v-list-item-title>nuxt-pokemon-card</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </nuxt-link>
         <nuxt-link v-for="link in links" :key="link.title" :link="link" :to="link.to">
           <v-list-item link>
-            <v-list-item-action class="mr-1">
+            <v-list-item-action>
               <v-icon>{{link.icon}}</v-icon>
             </v-list-item-action>
-            <v-list-item-content>
+            <v-list-item-content class>
               <v-list-item-title>{{link.title}}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </nuxt-link>
         <nuxt-link to="/dashboard" v-show="$store.state.authenticated">
           <v-list-item link>
-            <v-list-item-action class="mr-1">
+            <v-list-item-action>
               <v-icon>mdi-view-dashboard</v-icon>
             </v-list-item-action>
-            <v-list-item-content>
+            <v-list-item-content class>
               <v-list-item-title>Dashboard</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </nuxt-link>
         <nuxt-link to="/login" v-show="!$store.state.authenticated">
           <v-list-item link>
-            <v-list-item-action class="mr-1">
+            <v-list-item-action>
               <v-icon>mdi-login</v-icon>
             </v-list-item-action>
             <v-list-item-content>
@@ -37,10 +44,78 @@
         </nuxt-link>
         <a>
           <v-list-item link v-show="$store.state.authenticated" @click="logout">
-            <v-list-item-action class="mr-1">
+            <v-list-item-action>
               <v-icon>mdi-logout</v-icon>
             </v-list-item-action>
             <v-list-item-content>
+              <v-list-item-title>Logout</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </a>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-app-bar app>
+      <v-app-bar-nav-icon class="d-sm-none" @click.stop="drawer = !drawer" />
+      <v-toolbar-title class="d-sm-none">nuxt-pokemon-card</v-toolbar-title>
+      <v-row class="d-flex mx-0">
+        <nuxt-link to="/" class="d-none d-sm-flex">
+          <v-list-item link>
+            <v-list-item-action class="mr-1">
+              <v-icon>mdi-home</v-icon>
+            </v-list-item-action>
+            <v-list-item-content class="d-none d-md-flex">
+              <v-list-item-title>nuxt-pokemon-card</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </nuxt-link>
+        <nuxt-link
+          class="d-none d-sm-flex"
+          v-for="link in links"
+          :key="link.title"
+          :link="link"
+          :to="link.to"
+        >
+          <v-list-item link>
+            <v-list-item-action class="mr-1">
+              <v-icon>{{link.icon}}</v-icon>
+            </v-list-item-action>
+            <v-list-item-content class="d-none d-md-flex">
+              <v-list-item-title>{{link.title}}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </nuxt-link>
+        <nuxt-link to="/dashboard" v-show="$store.state.authenticated" class="d-none d-sm-flex">
+          <v-list-item link>
+            <v-list-item-action class="mr-1">
+              <v-icon>mdi-view-dashboard</v-icon>
+            </v-list-item-action>
+            <v-list-item-content class="d-none d-md-flex">
+              <v-list-item-title>Dashboard</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </nuxt-link>
+        <nuxt-link to="/login" class="d-none d-sm-flex" v-if="!$store.state.authenticated">
+          <v-list-item link>
+            <v-list-item-action class="mr-1">
+              <v-icon>mdi-login</v-icon>
+            </v-list-item-action>
+            <v-list-item-content class="d-none d-md-flex">
+              <v-list-item-title>Login</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </nuxt-link>
+        <a>
+          <v-list-item
+            link
+            class="d-none d-sm-flex"
+            v-if="$store.state.authenticated"
+            @click="logout"
+          >
+            <v-list-item-action class="mr-1">
+              <v-icon>mdi-logout</v-icon>
+            </v-list-item-action>
+            <v-list-item-content class="d-none d-md-flex">
               <v-list-item-title>Logout</v-list-item-title>
             </v-list-item-content>
           </v-list-item>

@@ -3,39 +3,37 @@
     <v-container class="d-flex flex-wrap justify-center">
       <div>
         <h1>從你的卡牌中挑選一張進行戰鬥</h1>
-        <p>目前連贏次數:{{count}}</p>
+        <p>目前連贏次數: {{count}}</p>
         <v-row class="d-flex flex-wrap" style="max-width:660px">
           <battleCard v-for="card in cards" :card="card" :key="card._id" @battle="battle(card)" />
         </v-row>
       </div>
       <div>
         <h1>你的對手</h1>
-        <battleCard :card="enemy" />
+        <battleCard :card="enemy" v-if="enemy" />
       </div>
+      <v-row justify="center" v-if=" pokemon && enemy">
+        <v-dialog v-model="dialog" max-width="290">
+          <v-card>
+            <v-card-title v-if="result === 'WIN'" class="headline">
+              {{result}}
+              <br />
+              使用{{pokemon.name}}打贏了{{enemy.name}}
+            </v-card-title>
+            <v-card-title v-else class="headline">
+              {{result}}
+              <br />
+              使用{{pokemon.name}}打輸了{{enemy.name}}
+            </v-card-title>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="green darken-1" text @click="refreshEnemy">Agree</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-row>
     </v-container>
-    <v-row justify="center">
-      <v-dialog v-model="dialog" max-width="290">
-        <v-card>
-          <v-card-title
-            v-show="result === 'WIN'"
-            class="headline"
-          >{{result}}!!!使用{{pokemon.name}}打贏了{{enemy.name}}</v-card-title>
-          <v-card-title
-            v-show="result === 'LOSS'"
-            class="headline"
-          >{{result}}!!!使用{{pokemon.name}}打輸了{{enemy.name}}</v-card-title>
-          <v-card-text>是否再次戰鬥</v-card-text>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-
-            <v-btn color="green darken-1" text @click="dialog = false">Disagree</v-btn>
-
-            <v-btn color="green darken-1" text @click="refreshEnemy">Agree</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </v-row>
   </v-content>
 </template>
 <script>
@@ -61,7 +59,7 @@ export default {
       return this.$store.state.products;
     },
     enemy() {
-      return this.products[this.number];
+      return this.products[this.number] || this.products[0];
     }
   },
   methods: {
@@ -78,23 +76,24 @@ export default {
         }
       }
     },
+    getRandom(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    },
+    getNewNumber() {
+      this.number = this.getRandom(0, this.products.length);
+    },
     refreshEnemy() {
       this.dialog = false;
       if (this.result === "WIN") {
         setTimeout(() => {
-          this.number = this.getRandom(0, this.products.length);
-        }, 500);
+          this.getNewNumber();
+        }, 100);
       }
-    },
-    getRandom(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
     }
   },
-  async fetch({ store }) {
-    await store.dispatch("getProducts");
-  },
   created() {
-    this.number = this.getRandom(0, this.products.length);
+    this.$store.dispatch("getProducts");
+    this.getNewNumber();
   }
 };
 </script>
