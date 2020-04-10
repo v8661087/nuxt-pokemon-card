@@ -2,7 +2,7 @@
   <v-app>
     <v-content>
       <v-container>
-        <v-row justify="center">
+        <v-row>
           <Card v-for="card in cards" :card="card" :key="card._id" @delete="deleteFromCards(card)" />
         </v-row>
       </v-container>

@@ -85,7 +85,7 @@
             </v-list-item-content>
           </v-list-item>
         </nuxt-link>
-        <nuxt-link to="/dashboard" v-show="$store.state.authenticated" class="d-none d-sm-flex">
+        <nuxt-link to="/dashboard" v-if="$store.state.authenticated" class="d-none d-sm-flex">
           <v-list-item link>
             <v-list-item-action class="mr-1">
               <v-icon>mdi-view-dashboard</v-icon>

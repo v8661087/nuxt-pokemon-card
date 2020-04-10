@@ -1,22 +1,26 @@
-# nuxt-pokemon-card
+# nuxt-pokemon-card 寶可夢卡牌對戰
 
-> My hunky-dory Nuxt.js project
+使用 Nuxt.js，Vuetify 建立 UI，串接由 Node.js Express MongoDB Atlas Heroku 建立之 RESTful API 取得資料。
+，<img src="static/index.jpg"/>
+<img src="static/pokemon.jpg"/>
+<img src="static/battle.jpg"/>
 
-## Build Setup
+# Live Demo
 
-```bash
-# install dependencies
-$ yarn install
+<a href="https://v8661087.github.io/nuxt-pokemon-card" target="_blank">https://v8661087.github.io/nuxt-pokemon-card</a>
 
-# serve with hot reload at localhost:3000
-$ yarn dev
+# 簡介
 
-# build for production and launch server
-$ yarn build
-$ yarn start
+主要功能:
 
-# generate static project
-$ yarn generate
-```
+<li>寶可夢(分類)、卡片檢視、對戰、管理員登入、登出</li>
 
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+# 使用技能
+
+<li>Nuxt.js</li>
+<li>Vuetify</li>
+
+# 圖片來源
+
+<li>google圖片</li>
+<li>寶可夢圖鑑 <a href="https://tw.portal-pokemon.com/play/pokedex">https://tw.portal-pokemon.com/play/pokedex</li>
