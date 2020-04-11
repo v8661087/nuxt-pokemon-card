@@ -99,6 +99,8 @@ export default {
   },
   created() {
     this.$vuetify.theme.dark = true;
+  },
+  mounted(){
     this.$nextTick(() => {
       this.$nuxt.$loading.start();
       if (this.products) {
