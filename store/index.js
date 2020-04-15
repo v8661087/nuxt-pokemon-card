@@ -30,6 +30,8 @@ export const actions = {
     try {
       const products = await this.$axios.$get(process.env.VUE_APP_PRODUCTS_URL);
       commit("GET_PRODUCTS", products);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   }
 };

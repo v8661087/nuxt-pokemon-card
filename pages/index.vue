@@ -25,37 +25,30 @@ export default {
     return {
       items: [
         {
-          src: "https://pokemongolive.com/img/posts/gobattleleague-season1.jpg"
+          src: require("@/assets/wallpaper1.jpg")
         },
         {
-          src:
-            "https://pokemongolive.com/img/posts/gobattleleague-announcement-2.jpg"
+          src: require("@/assets/wallpaper2.jpg")
         },
         {
-          src:
-            "https://applealmond.com/wp-content/uploads/2018/09/1536597576-022637b1f0a61763ab921258cb559bf2.jpg"
+          src: require("@/assets/wallpaper4.jpg")
         },
         {
-          src:
-            "https://cdn.unwire.pro/wp-content/uploads/2018/07/pokemon-go-two-years-1320x774.jpg"
+          src: require("@/assets/wallpaper5.jpg")
         }
       ],
       sides: [
         {
-          src:
-            "https://www.upmedia.mg/upload/content/20190628/Wn190628152858813996.jpg"
+          src: require("@/assets/slide1.jpg")
         },
         {
-          src:
-            "https://image-cdn.hypb.st/https%3A%2F%2Fhk.hypebeast.com%2Ffiles%2F2019%2F11%2Fpokemon-sword-shield-best-selling-launch-series-1.jpg?q=75&w=800&cbr=1&fit=max"
+          src: require("@/assets/slide2.jpg")
         },
         {
-          src:
-            "https://img.4gamers.com.tw/ckfinder/files/Elvis/News/20191014-Pokemon/a-regi-return-2019.jpg"
+          src: require("@/assets/slide3.jpg")
         },
         {
-          src:
-            "https://iwaishin.com/wp-content/uploads/2018/02/%E7%83%88%E7%A9%BA%E5%BA%A7-Pokemon-Go.png"
+          src: require("@/assets/slide4.png")
         }
       ]
     };

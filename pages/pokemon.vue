@@ -13,7 +13,7 @@
             @click="setType(type)"
           >{{type.name}}</v-btn>
         </v-row>
-        <v-row justify="center">
+        <v-row justify-lg="center">
           <Product
             v-for="product in filteredProducts"
             :product="product"
@@ -100,7 +100,7 @@ export default {
   created() {
     this.$vuetify.theme.dark = true;
   },
-  mounted(){
+  mounted() {
     this.$nextTick(() => {
       this.$nuxt.$loading.start();
       if (this.products) {
