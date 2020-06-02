@@ -24,7 +24,13 @@ export default {
         content: "nuxt-pokemon-card"
       }
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+    link: [
+      {
+        rel: "preconnect",
+        href: "https://v8661087.github.io/nuxt-pokemon-card/pokemon"
+      }
+    ]
   },
   /*
    ** Customize the progress-bar color
