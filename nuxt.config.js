@@ -1,4 +1,7 @@
 import colors from "vuetify/es5/util/colors";
+import fs from "fs";
+import path from "path";
+
 const routerBase =
   process.env.DEPLOY_ENV === "GH_PAGES"
     ? {
@@ -32,6 +35,17 @@ export default {
       }
     ]
   },
+  server: {
+    port: 5500, // default: 3000
+    host: "localhost", // default: localhost,
+    timing: false,
+    https: {
+      key: fs.readFileSync(
+        path.resolve("C:/Users/fa", "example.com+5-key.pem")
+      ),
+      cert: fs.readFileSync(path.resolve("C:/Users/fa", "example.com+5.pem"))
+    }
+  },
   /*
    ** Customize the progress-bar color
    */
@@ -46,7 +60,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: ["~/plugins/axios.js"],
   /*
    ** Nuxt.js dev-modules
    */
@@ -64,7 +78,7 @@ export default {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: { https: true },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module

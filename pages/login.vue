@@ -21,11 +21,11 @@ export default {
     valid: true,
     email: "test@test.com",
     emailRules: [
-      v => !!v || "E-mail is required",
-      v => /.+@.+\..+/.test(v) || "E-mail must be valid"
+      (v) => !!v || "E-mail is required",
+      (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
     ],
     password: "testtest",
-    passwordRules: [v => !!v || "Password is required"]
+    passwordRules: [(v) => !!v || "Password is required"],
   }),
   methods: {
     validate() {
@@ -36,7 +36,7 @@ export default {
     login() {
       const accounts = this.$store.state.accounts;
       let account = accounts.find(
-        item => item.email === this.email && item.password === this.password
+        (item) => item.email === this.email && item.password === this.password
       );
       if (account) {
         setTimeout(() => {
@@ -44,8 +44,8 @@ export default {
           this.$router.push("/dashboard");
         }, 500);
       }
-    }
+    },
   },
-  middleware: "auth"
+  middleware: "auth",
 };
 </script>
