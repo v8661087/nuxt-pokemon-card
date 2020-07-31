@@ -25,33 +25,33 @@ export default {
     return {
       items: [
         {
-          src: require("@/assets/wallpaper1.jpg")
+          src: require("@/assets/wallpaper1.jpg"),
         },
         {
-          src: require("@/assets/wallpaper2.jpg")
+          src: require("@/assets/wallpaper2.jpg"),
         },
         {
-          src: require("@/assets/wallpaper4.jpg")
+          src: require("@/assets/wallpaper4.jpg"),
         },
         {
-          src: require("@/assets/wallpaper5.jpg")
-        }
+          src: require("@/assets/wallpaper5.jpg"),
+        },
       ],
       sides: [
         {
-          src: require("@/assets/slide1.jpg")
+          src: require("@/assets/slide1.jpg"),
         },
         {
-          src: require("@/assets/slide2.jpg")
+          src: require("@/assets/slide2.jpg"),
         },
         {
-          src: require("@/assets/slide3.jpg")
+          src: require("@/assets/slide3.jpg"),
         },
         {
-          src: require("@/assets/slide4.png")
-        }
-      ]
+          src: require("@/assets/slide4.png"),
+        },
+      ],
     };
-  }
+  },
 };
 </script>

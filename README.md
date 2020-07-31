@@ -19,6 +19,7 @@
 
 <li>Nuxt.js</li>
 <li>Vuetify</li>
+<li>Google Facebook Login</li>
 
 # 圖片來源
 

@@ -95,8 +95,13 @@
             </v-list-item-content>
           </v-list-item>
         </nuxt-link>
-        <nuxt-link to="/login" class="d-none d-sm-flex" v-if="!$store.state.authenticated">
-          <v-list-item link>
+        <a>
+          <v-list-item
+            link
+            class="d-none d-sm-flex"
+            v-if="!$store.state.authenticated"
+            @click="toLogin"
+          >
             <v-list-item-action class="mr-1">
               <v-icon>mdi-login</v-icon>
             </v-list-item-action>
@@ -104,7 +109,7 @@
               <v-list-item-title>Login</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-        </nuxt-link>
+        </a>
         <a>
           <v-list-item
             link
@@ -164,39 +169,48 @@ export default {
         {
           icon: "mdi-information",
           title: "About",
-          to: "/about"
+          to: "/about",
         },
         {
           icon: "mdi-pokeball",
           title: "Pokemon",
-          to: "/pokemon"
+          to: "/pokemon",
         },
         {
           icon: "mdi-cards",
           title: "Cards",
-          to: "/cards"
+          to: "/cards",
         },
         {
           icon: "mdi-sword",
           title: "Battle",
-          to: "/battle"
-        }
+          to: "/battle",
+        },
       ],
       icons: [
         "mdi-facebook",
         "mdi-twitter",
         "mdi-google-plus",
         "mdi-linkedin",
-        "mdi-instagram"
-      ]
+        "mdi-instagram",
+      ],
     };
   },
   methods: {
-    logout() {
-      this.$store.commit("logout");
+    toLogin() {
       this.$router.push("/login");
-    }
-  }
+      setTimeout(() => this.$router.go(0), 300);
+    },
+    logout() {
+      let auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(function () {
+        console.log("User signed out.");
+      });
+      this.$router.push("/login");
+      this.$store.commit("logout");
+      setTimeout(() => this.$router.go(0), 300);
+    },
+  },
 };
 </script>
 <style>
