@@ -199,7 +199,6 @@ export default {
   methods: {
     toLogin() {
       this.$router.push("/login");
-      setTimeout(() => this.$router.go(0), 300);
     },
     logout() {
       let auth2 = gapi.auth2.getAuthInstance();
@@ -208,7 +207,6 @@ export default {
       });
       this.$router.push("/login");
       this.$store.commit("logout");
-      setTimeout(() => this.$router.go(0), 300);
     },
   },
 };

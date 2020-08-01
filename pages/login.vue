@@ -26,7 +26,7 @@
         data-layout="default"
         data-auto-logout-link="false"
         data-use-continue-as="false"
-        onlogin="checkLoginState();"
+        onlogin="checkLoginState()"
       ></div>
     </v-container>
   </v-content>
@@ -58,6 +58,34 @@ function createFB() {
 }
 
 export default {
+  head() {
+    return {
+      meta: [
+        { name: "google-signin-scope", content: "profile email" },
+        {
+          name: "google-signin-client_id",
+          content:
+            "386926783789-jf64i4b80rd3dsks4h3f12aegr097mfd.apps.googleusercontent.com",
+        },
+      ],
+      script: [
+        {
+          src: "https://apis.google.com/js/platform.js",
+          defer: true,
+          async: true,
+          crossorigin: "anonymous",
+        },
+        {
+          src:
+            "https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0&appId=2903396656422404&autoLogAppEvents=1",
+          defer: true,
+          async: true,
+          crossorigin: "anonymous",
+          nonce: "9WEpcLMM",
+        },
+      ],
+    };
+  },
   mounted() {
     createFB();
     var vm = this;
@@ -79,6 +107,7 @@ export default {
       vm.$store.commit("login");
       vm.$router.push("/dashboard");
     };
+    if (window.FB) window.FB.XFBML.parse();
   },
   data: () => ({
     valid: true,
